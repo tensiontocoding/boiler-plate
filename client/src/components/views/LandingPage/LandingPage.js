@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Auth from '../../../hoc/auth';
 
 function LandingPage(props) {
 
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         axios.get('http://localhost:5001/api/hello')
             .then(response => { console.log(response) })
@@ -16,7 +17,7 @@ function LandingPage(props) {
             .then(response => {
                 if (response.data.success) {
                     navigate("/login");
-                }else{
+                } else {
                     alert('로그아웃하는데 실패했습니다.')
                 }
             })
@@ -34,4 +35,4 @@ function LandingPage(props) {
     );
 }
 
-export default LandingPage;
+export default Auth(LandingPage, null);
